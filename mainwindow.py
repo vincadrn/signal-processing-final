@@ -1,12 +1,6 @@
-# This Python file uses the following encoding: utf-8
-import sys
 from pathlib import Path
 import tkinter as tk
 from tkinter import Frame, Tk, Canvas, Entry, Text, Button, PhotoImage
-# Important:
-# You need to run the following command to generate the ui_form.py file
-#     pyside6-uic form.ui -o ui_form.py, or
-#     pyside2-uic form.ui -o ui_form.py
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"D:\build\assets\frame0")
