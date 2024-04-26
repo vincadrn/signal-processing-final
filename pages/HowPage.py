@@ -37,6 +37,7 @@ class HowPage(tk.Frame):
         self.button_image_1 = PhotoImage(
             file=relative_to_assets("button_1.png"))
         self.button_1 = Button(
+            master=self,
             image=self.button_image_1,
             borderwidth=0,
             highlightthickness=0,
@@ -69,6 +70,7 @@ class HowPage(tk.Frame):
         self.button_image_2 = PhotoImage(
             file=relative_to_assets("button_2.png"))
         self.button_2 = Button(
+            master=self,
             image=self.button_image_2,
             borderwidth=0,
             highlightthickness=0,
@@ -101,6 +103,7 @@ class HowPage(tk.Frame):
         self.button_image_3 = PhotoImage(
             file=relative_to_assets("button_3.png"))
         self.button_3 = Button(
+            master=self,
             image=self.button_image_3,
             borderwidth=0,
             highlightthickness=0,
@@ -133,6 +136,7 @@ class HowPage(tk.Frame):
         self.button_image_4 = PhotoImage(
             file=relative_to_assets("button_4.png"))
         self.button_4 = Button(
+            master=self,
             image=self.button_image_4,
             borderwidth=0,
             highlightthickness=0,
@@ -261,6 +265,7 @@ class HowPage(tk.Frame):
         self.button_image_5 = PhotoImage(
             file=relative_to_assets("button_5.png"))
         self.button_5 = Button(
+            master=self,
             image=self.button_image_5,
             borderwidth=0,
             highlightthickness=0,
