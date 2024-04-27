@@ -1,8 +1,10 @@
 import tkinter as tk
 from pages.StartPage import StartPage
 from pages.HowPage import HowPage
+from pages.CompressPage import CompressPage
+from pages.AboutPage import AboutPage
 
-class SampleApp(tk.Tk):
+class App(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -13,11 +15,11 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (StartPage, HowPage):
+        for F in (StartPage, HowPage, CompressPage, AboutPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
-            
+
             frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame("StartPage")
@@ -29,7 +31,8 @@ class SampleApp(tk.Tk):
 
 
 if __name__ == "__main__":
-    app = SampleApp()
+    app = App()
     app.title("Video Compressor Application")
     app.geometry("950x560")
+    app.resizable(False, False)
     app.mainloop()
