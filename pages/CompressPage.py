@@ -1,12 +1,15 @@
 from pathlib import Path
 from tkinter import Canvas, Button, PhotoImage, filedialog
 import tkinter as tk
+import sys
+
+sys.path.append("..")
+
+from transcode import Transcoder
 
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"..\assets\compressPage")
-SAVE_PATH = ""
-VIDEO_PATH = ""
 
 
 def relative_to_assets(path: str) -> Path:
@@ -16,6 +19,11 @@ class CompressPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+
+        self.transcoder = Transcoder()
+        self.save_path = ""
+        self.video_path = ""
+
         self.controller = controller
         self.filetypes = (
             ('MP4 files', '*.mp4'),
@@ -268,7 +276,7 @@ class CompressPage(tk.Frame):
             image=button_image_5,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: startCompress(),
+            command=lambda: self.transcoder.transcode(self.save_path, self.video_path),
             relief="flat"
         )
         button_5.place(
@@ -376,9 +384,9 @@ class CompressPage(tk.Frame):
         button_7.bind('<Leave>', button_7_leave)
     
     def open_save_directory(self):
-        SAVE_PATH = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
+        self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
 
-        if SAVE_PATH == "" :
+        if self.save_path == "" :
             self.image_image_11 = PhotoImage(
                 file=relative_to_assets("image_10.png"))
             self.image_11 = self.canvas.create_image(
@@ -396,11 +404,12 @@ class CompressPage(tk.Frame):
                 image=self.image_image_11
             )
 
-        print(SAVE_PATH)
+        print(self.save_path)
 
     def input_video_path(self):
-        VIDEO_PATH = filedialog.askopenfilename(filetypes=self.filetypes, title="Input your video")
-        if VIDEO_PATH == "" :
+        self.video_path = filedialog.askopenfilename(filetypes=self.filetypes, title="Input your video")
+
+        if self.video_path == "" :
             self.image_image_10 = PhotoImage(
                 file=relative_to_assets("image_10.png"))
             self.image_10 = self.canvas.create_image(
@@ -418,4 +427,4 @@ class CompressPage(tk.Frame):
                 image=self.image_image_10
             )
 
-        print(VIDEO_PATH)
+        print(self.video_path)
