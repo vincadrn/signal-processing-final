@@ -3,6 +3,7 @@ from pages.StartPage import StartPage
 from pages.HowPage import HowPage
 from pages.CompressPage import CompressPage
 from pages.AboutPage import AboutPage
+from pages.WebcamPage import WebcamPage
 
 class App(tk.Tk):
 
@@ -15,7 +16,7 @@ class App(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (StartPage, HowPage, CompressPage, AboutPage):
+        for F in (StartPage, HowPage, CompressPage, AboutPage, WebcamPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
