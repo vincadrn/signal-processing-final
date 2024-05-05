@@ -59,10 +59,11 @@ class Transcoder:
             for frame in reader:
                 writer.send(frame)
         except:
-            raise
+            return False
         finally:
             writer.close()
             reader.close()
+            return True
 
     def _append_container_if_none(self, path: str, container: str):
         container_format = container.strip(".") if container is not None else ""
