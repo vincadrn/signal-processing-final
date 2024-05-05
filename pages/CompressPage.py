@@ -452,6 +452,12 @@ class CompressPage(tk.Frame):
                 image=self.image_image_11
             )
 
+            try:
+                self.canvas.delete(self.image_10)
+
+            except:
+                None
+
         print(self.save_path)
 
     def input_video_path(self):
