@@ -429,7 +429,7 @@ class CompressPage(tk.Frame):
         self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
 
         if self.save_path == "" :
-            self.image_image_11 = PhotoImage(
+            self.image_image_10 = PhotoImage(
                 file=relative_to_assets("image_10.png"))
             self.image_10 = self.canvas.create_image(
                 580.800048828125,
