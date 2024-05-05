@@ -41,200 +41,36 @@ class CompressPage(tk.Frame):
             image=self.image_image_1
         )
 
-        button_image_1 = PhotoImage(
-            file=relative_to_assets("button_1.png"))
-        button_1 = Button(
-            master=self,
-            image=button_image_1,
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: controller.show_frame("StartPage"),
-            relief="flat"
-        )
-        button_1.place(
-            x=0.0,
-            y=148.0,
-            width=259.0,
-            height=30.0
-        )
-
-        button_image_hover_1 = PhotoImage(
-            file=relative_to_assets("button_hover_1.png"))
-
-        def button_1_hover(e):
-            button_1.config(
-                image=button_image_hover_1
-            )
-        def button_1_leave(e):
-            button_1.config(
-                image=button_image_1
-            )
-
-        button_1.bind('<Enter>', button_1_hover)
-        button_1.bind('<Leave>', button_1_leave)
-
-
-        button_image_2 = PhotoImage(
-            file=relative_to_assets("button_2.png"))
-        button_2 = Button(
-            master=self,
-            image=button_image_2,
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: controller.show_frame("HowPage"),
-            relief="flat"
-        )
-        button_2.place(
-            x=0.0,
-            y=211.0,
-            width=259.0,
-            height=30.0
-        )
-
-        button_image_hover_2 = PhotoImage(
-            file=relative_to_assets("button_hover_2.png"))
-
-        def button_2_hover(e):
-            button_2.config(
-                image=button_image_hover_2
-            )
-        def button_2_leave(e):
-            button_2.config(
-                image=button_image_2
-            )
-
-        button_2.bind('<Enter>', button_2_hover)
-        button_2.bind('<Leave>', button_2_leave)
-
-
-        button_image_3 = PhotoImage(
-            file=relative_to_assets("button_3.png"))
-        button_3 = Button(
-            master=self,
-            image=button_image_3,
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: controller.show_frame("CompressPage"),
-            relief="flat"
-        )
-        button_3.place(
-            x=0.0,
-            y=274.0,
-            width=259.0,
-            height=30.0
-        )
-
-        button_image_hover_3 = PhotoImage(
-            file=relative_to_assets("button_hover_3.png"))
-
-        def button_3_hover(e):
-            button_3.config(
-                image=button_image_hover_3
-            )
-        def button_3_leave(e):
-            button_3.config(
-                image=button_image_3
-            )
-
-        button_3.bind('<Enter>', button_3_hover)
-        button_3.bind('<Leave>', button_3_leave)
-
-
-        button_image_4 = PhotoImage(
-            file=relative_to_assets("button_4.png"))
-        button_4 = Button(
-            master=self,
-            image=button_image_4,
-            borderwidth=0,
-            highlightthickness=0,
-            command=lambda: controller.show_frame("AboutPage"),
-            relief="flat"
-        )
-        button_4.place(
-            x=0.0,
-            y=337.0,
-            width=259.0,
-            height=30.0
-        )
-
-        button_image_hover_4 = PhotoImage(
-            file=relative_to_assets("button_hover_4.png"))
-
-        def button_4_hover(e):
-            button_4.config(
-                image=button_image_hover_4
-            )
-        def button_4_leave(e):
-            button_4.config(
-                image=button_image_4
-            )
-
-        button_4.bind('<Enter>', button_4_hover)
-        button_4.bind('<Leave>', button_4_leave)
-
-
         self.image_image_2 = PhotoImage(
             file=relative_to_assets("image_2.png"))
         self.image_2 = self.canvas.create_image(
             584.0672607421875,
-            284.4524688720703,
+            284.4499969482422,
             image=self.image_image_2
         )
 
         self.image_image_3 = PhotoImage(
             file=relative_to_assets("image_3.png"))
         self.image_3 = self.canvas.create_image(
-            59.800048828125,
-            352.0,
+            380.499755859375,
+            85.39244079589844,
             image=self.image_image_3
         )
 
         self.image_image_4 = PhotoImage(
             file=relative_to_assets("image_4.png"))
         self.image_4 = self.canvas.create_image(
-            58.800048828125,
-            289.0,
+            390.800048828125,
+            127.0,
             image=self.image_image_4
         )
 
         self.image_image_5 = PhotoImage(
             file=relative_to_assets("image_5.png"))
         self.image_5 = self.canvas.create_image(
-            59.800048828125,
-            226.0,
-            image=self.image_image_5
-        )
-
-        self.image_image_6 = PhotoImage(
-            file=relative_to_assets("image_6.png"))
-        self.image_6 = self.canvas.create_image(
-            59.800048828125,
-            163.0,
-            image=self.image_image_6
-        )
-
-        self.image_image_7 = PhotoImage(
-            file=relative_to_assets("image_7.png"))
-        self.image_7 = self.canvas.create_image(
-            380.499755859375,
-            85.39244079589844,
-            image=self.image_image_7
-        )
-
-        self.image_image_8 = PhotoImage(
-            file=relative_to_assets("image_8.png"))
-        self.image_8 = self.canvas.create_image(
-            390.800048828125,
-            127.0,
-            image=self.image_image_8
-        )
-
-        self.image_image_9 = PhotoImage(
-            file=relative_to_assets("image_9.png"))
-        self.image_9 = self.canvas.create_image(
             583.800048828125,
             388.0,
-            image=self.image_image_9
+            image=self.image_image_5
         )
 
         self.image_image_12 = PhotoImage(
@@ -261,70 +97,74 @@ class CompressPage(tk.Frame):
             image=self.image_image_14
         )
 
-        button_image_5 = PhotoImage(
-            file=relative_to_assets("button_5.png"))
-        button_5 = Button(
+        self.button_image_1 = PhotoImage(
+            file=relative_to_assets("button_1.png"))
+        self.button_1 = Button(
             master=self,
-            image=button_image_5,
+            image=self.button_image_1,
             borderwidth=0,
             highlightthickness=0,
+<<<<<<< Updated upstream
             command=lambda: startCompress(),
+=======
+            command=lambda: self.transcode_start(),
+>>>>>>> Stashed changes
             relief="flat"
         )
-        button_5.place(
+        self.button_1.place(
             x=528.800048828125,
             y=417.0,
             width=111.0,
             height=43.0
         )
 
-        button_image_hover_5 = PhotoImage(
-            file=relative_to_assets("button_hover_5.png"))
+        self.button_image_hover_1 = PhotoImage(
+            file=relative_to_assets("button_hover_1.png"))
 
-        def button_5_hover(e):
-            button_5.config(
-                image=button_image_hover_5
+        def button_1_hover(e):
+            self.button_1.config(
+                image=self.button_image_hover_1
             )
-        def button_5_leave(e):
-            button_5.config(
-                image=button_image_5
+        def button_1_leave(e):
+            self.button_1.config(
+                image=self.button_image_1
             )
 
-        button_5.bind('<Enter>', button_5_hover)
-        button_5.bind('<Leave>', button_5_leave)
+        self.button_1.bind('<Enter>', button_1_hover)
+        self.button_1.bind('<Leave>', button_1_leave)
 
 
-        button_image_6 = PhotoImage(
-            file=relative_to_assets("button_6.png"))
-        button_6 = Button(
+        self.button_image_2 = PhotoImage(
+            file=relative_to_assets("button_2.png"))
+        self.button_2 = Button(
             master=self,
-            image=button_image_6,
+            image=self.button_image_2,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.open_save_directory(),
             relief="flat"
         )
-        button_6.place(
+        self.button_2.place(
             x=480.800048828125,
             y=182.0,
             width=207.0,
             height=43.0
         )
 
-        button_image_hover_6 = PhotoImage(
-            file=relative_to_assets("button_hover_6.png"))
+        self.button_image_hover_2 = PhotoImage(
+            file=relative_to_assets("button_hover_2.png"))
 
-        def button_6_hover(e):
-            button_6.config(
-                image=button_image_hover_6
+        def button_2_hover(e):
+            self.button_2.config(
+                image=self.button_image_hover_2
             )
-        def button_6_leave(e):
-            button_6.config(
-                image=button_image_6
+        def button_2_leave(e):
+            self.button_2.config(
+                image=self.button_image_2
             )
 
-        button_6.bind('<Enter>', button_6_hover)
-        button_6.bind('<Leave>', button_6_leave)
+        self.button_2.bind('<Enter>', button_2_hover)
+        self.button_2.bind('<Leave>', button_2_leave)
 
 
         self.image_image_15 = PhotoImage(
@@ -343,59 +183,277 @@ class CompressPage(tk.Frame):
             image=self.image_image_16
         )
 
-        button_image_7 = PhotoImage(
-            file=relative_to_assets("button_7.png"))
-        button_7 = Button(
+        self.button_image_3 = PhotoImage(
+            file=relative_to_assets("button_3.png"))
+        self.button_3 = Button(
             master=self,
-            image=button_image_7,
+            image=self.button_image_3,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: (self.input_video_path()),
+            command=lambda: self.input_video_path(),
             relief="flat"
         )
-        button_7.place(
+        self.button_3.place(
             x=529.800048828125,
             y=250.0,
             width=109.0,
             height=109.0
         )
 
-        button_image_hover_7 = PhotoImage(
+        self.button_image_hover_3 = PhotoImage(
+            file=relative_to_assets("button_hover_3.png"))
+
+        def button_3_hover(e):
+            self.button_3.config(
+                image=self.button_image_hover_3
+            )
+        def button_3_leave(e):
+            self.button_3.config(
+                image=self.button_image_3
+            )
+
+        self.button_3.bind('<Enter>', button_3_hover)
+        self.button_3.bind('<Leave>', button_3_leave)
+
+
+        self.button_image_4 = PhotoImage(
+            file=relative_to_assets("button_4.png"))
+        self.button_4 = Button(
+            master=self,
+            image=self.button_image_4,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame("StartPage"),
+            relief="flat"
+        )
+        self.button_4.place(
+            x=0.199951171875,
+            y=111.0,
+            width=259.0,
+            height=30.0
+        )
+
+        self.button_image_hover_4 = PhotoImage(
+            file=relative_to_assets("button_hover_4.png"))
+
+        def button_4_hover(e):
+            self.button_4.config(
+                image=self.button_image_hover_4
+            )
+        def button_4_leave(e):
+            self.button_4.config(
+                image=self.button_image_4
+            )
+
+        self.button_4.bind('<Enter>', button_4_hover)
+        self.button_4.bind('<Leave>', button_4_leave)
+
+
+        self.button_image_5 = PhotoImage(
+            file=relative_to_assets("button_5.png"))
+        self.button_5 = Button(
+            master=self,
+            image=self.button_image_5,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame("HowPage"),
+            relief="flat"
+        )
+        self.button_5.place(
+            x=0.199951171875,
+            y=174.0,
+            width=259.0,
+            height=30.0
+        )
+
+        self.button_image_hover_5 = PhotoImage(
+            file=relative_to_assets("button_hover_5.png"))
+
+        def button_5_hover(e):
+            self.button_5.config(
+                image=self.button_image_hover_5
+            )
+        def button_5_leave(e):
+            self.button_5.config(
+                image=self.button_image_5
+            )
+
+        self.button_5.bind('<Enter>', button_5_hover)
+        self.button_5.bind('<Leave>', button_5_leave)
+
+
+        self.button_image_6 = PhotoImage(
+            file=relative_to_assets("button_6.png"))
+        self.button_6 = Button(
+            master=self,
+            image=self.button_image_6,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame("CompressPage"),
+            relief="flat"
+        )
+        self.button_6.place(
+            x=0.199951171875,
+            y=237.0,
+            width=259.0,
+            height=30.0
+        )
+
+        self.button_image_hover_6 = PhotoImage(
+            file=relative_to_assets("button_hover_6.png"))
+
+        def button_6_hover(e):
+            self.button_6.config(
+                image=self.button_image_hover_6
+            )
+        def button_6_leave(e):
+            self.button_6.config(
+                image=self.button_image_6
+            )
+
+        self.button_6.bind('<Enter>', button_6_hover)
+        self.button_6.bind('<Leave>', button_6_leave)
+
+
+        self.button_image_7 = PhotoImage(
+            file=relative_to_assets("button_7.png"))
+        self.button_7 = Button(
+            master=self,
+            image=self.button_image_7,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame("AboutPage"),
+            relief="flat"
+        )
+        self.button_7.place(
+            x=0.199951171875,
+            y=300.0,
+            width=259.0,
+            height=30.0
+        )
+
+        self.button_image_hover_7 = PhotoImage(
             file=relative_to_assets("button_hover_7.png"))
 
         def button_7_hover(e):
-            button_7.config(
-                image=button_image_hover_7
+            self.button_7.config(
+                image=self.button_image_hover_7
             )
         def button_7_leave(e):
-            button_7.config(
-                image=button_image_7
+            self.button_7.config(
+                image=self.button_image_7
             )
 
-        button_7.bind('<Enter>', button_7_hover)
-        button_7.bind('<Leave>', button_7_leave)
+        self.button_7.bind('<Enter>', button_7_hover)
+        self.button_7.bind('<Leave>', button_7_leave)
+
+
+        self.button_image_8 = PhotoImage(
+            file=relative_to_assets("button_8.png"))
+        self.button_8 = Button(
+            master=self,
+            image=self.button_image_8,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame("TakeVideoPage"),
+            relief="flat"
+        )
+        self.button_8.place(
+            x=0.199951171875,
+            y=367.0,
+            width=259.0,
+            height=30.0
+        )
+
+        self.button_image_hover_8 = PhotoImage(
+            file=relative_to_assets("button_hover_8.png"))
+
+        def button_8_hover(e):
+            self.button_8.config(
+                image=self.button_image_hover_8
+            )
+        def button_8_leave(e):
+            self.button_8.config(
+                image=self.button_image_8
+            )
+
+        self.button_8.bind('<Enter>', button_8_hover)
+        self.button_8.bind('<Leave>', button_8_leave)
+
+
+        self.image_image_17 = PhotoImage(
+            file=relative_to_assets("image_17.png"))
+        self.image_17 = self.canvas.create_image(
+            58.60009765625,
+            382.0,
+            image=self.image_image_17
+        )
+
+        self.image_image_18 = PhotoImage(
+            file=relative_to_assets("image_18.png"))
+        self.image_18 = self.canvas.create_image(
+            59.60009765625,
+            315.0,
+            image=self.image_image_18
+        )
+
+        self.image_image_19 = PhotoImage(
+            file=relative_to_assets("image_19.png"))
+        self.image_19 = self.canvas.create_image(
+            58.60009765625,
+            252.0,
+            image=self.image_image_19
+        )
+
+        self.image_image_20 = PhotoImage(
+            file=relative_to_assets("image_20.png"))
+        self.image_20 = self.canvas.create_image(
+            59.60009765625,
+            189.0,
+            image=self.image_image_20
+        )
+
+        self.image_image_21 = PhotoImage(
+            file=relative_to_assets("image_21.png"))
+        self.image_21 = self.canvas.create_image(
+            59.60009765625,
+            126.0,
+            image=self.image_image_21
+        )
     
     def open_save_directory(self):
         SAVE_PATH = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
 
+<<<<<<< Updated upstream
         if SAVE_PATH == "" :
             self.image_image_11 = PhotoImage(
+=======
+        if self.save_path == "" :
+            self.image_image_10 = PhotoImage(
+>>>>>>> Stashed changes
                 file=relative_to_assets("image_10.png"))
-            self.image_11 = self.canvas.create_image(
-                583.800048828125,
+            self.image_10 = self.canvas.create_image(
+                580.800048828125,
                 170.0,
-                image=self.image_image_11
+                image=self.image_image_10
             )
+
+            try:
+                self.canvas.delete(self.image_11)
+
+            except:
+                None
         
         else :
             self.image_image_11 = PhotoImage(
                 file=relative_to_assets("image_11.png"))
             self.image_11 = self.canvas.create_image(
-                583.800048828125,
+                580.800048828125,
                 170.0,
                 image=self.image_image_11
             )
 
+<<<<<<< Updated upstream
         print(SAVE_PATH)
 
     def input_video_path(self):
@@ -405,17 +463,73 @@ class CompressPage(tk.Frame):
                 file=relative_to_assets("image_10.png"))
             self.image_10 = self.canvas.create_image(
                 580.800048828125,
+=======
+            try:
+                self.canvas.delete(self.image_10)
+
+            except:
+                None
+
+        print(self.save_path)
+
+    def input_video_path(self):
+        self.video_path = filedialog.askopenfilename(filetypes=self.filetypes, title="Input your video")
+
+        if self.video_path == "" :
+            self.image_image_8 = PhotoImage(
+                file=relative_to_assets("image_8.png"))
+            self.image_8 = self.canvas.create_image(
+                719.800048828125,
+                305.0,
+                image=self.image_image_8
+            )
+            
+            try:
+                self.canvas.delete(self.image_9)
+
+            except:
+                None
+
+        else:
+            self.image_image_9 = PhotoImage(
+                file=relative_to_assets("image_9.png"))
+            self.image_9 = self.canvas.create_image(
+                688.800048828125,
+                305.0,
+                image=self.image_image_9
+            )
+
+            try:
+                self.canvas.delete(self.image_8)
+
+            except:
+                None
+
+        print(self.video_path)
+
+    def transcode_start(self):
+        success = self.transcoder.transcode(self.save_path, self.video_path)
+
+        if success:
+            self.image_image_7 = PhotoImage(
+                file=relative_to_assets("image_7.png"))
+            self.image_7 = self.canvas.create_image(
+                583.800048828125,
+>>>>>>> Stashed changes
                 472.0,
-                image=self.image_image_10
+                image=self.image_image_7
             )
 
         else:
-            self.image_image_10 = PhotoImage(
-                file=relative_to_assets("image_11.png"))
-            self.image_10 = self.canvas.create_image(
+            self.image_image_6 = PhotoImage(
+                file=relative_to_assets("image_6.png"))
+            self.image_6 = self.canvas.create_image(
                 580.800048828125,
                 472.0,
-                image=self.image_image_10
+                image=self.image_image_6
             )
+<<<<<<< Updated upstream
 
         print(VIDEO_PATH)
+=======
+>>>>>>> Stashed changes

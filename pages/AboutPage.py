@@ -16,7 +16,7 @@ class AboutPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
-        canvas = Canvas(
+        self.canvas = Canvas(
             self,
             bg = "#060B24",
             height = 560,
@@ -26,13 +26,85 @@ class AboutPage(tk.Frame):
             relief = "ridge"
         )
 
-        canvas.place(x = 0, y = 0)
+        self.canvas.place(x = 0, y = 0)
         self.image_image_1 = PhotoImage(
             file=relative_to_assets("image_1.png"))
-        self.image_1 = canvas.create_image(
+        image_1 = self.canvas.create_image(
             125.965087890625,
             64.42745971679688,
             image=self.image_image_1
+        )
+
+        self.image_image_2 = PhotoImage(
+            file=relative_to_assets("image_2.png"))
+        image_2 = self.canvas.create_image(
+            584.067138671875,
+            284.4524688720703,
+            image=self.image_image_2
+        )
+
+        self.image_image_3 = PhotoImage(
+            file=relative_to_assets("image_3.png"))
+        image_3 = self.canvas.create_image(
+            344.499755859375,
+            85.39244079589844,
+            image=self.image_image_3
+        )
+
+        self.image_image_4 = PhotoImage(
+            file=relative_to_assets("image_4.png"))
+        image_4 = self.canvas.create_image(
+            414.800048828125,
+            127.0,
+            image=self.image_image_4
+        )
+
+        self.image_image_5 = PhotoImage(
+            file=relative_to_assets("image_5.png"))
+        image_5 = self.canvas.create_image(
+            564.800048828125,
+            271.0,
+            image=self.image_image_5
+        )
+
+        self.image_image_6 = PhotoImage(
+            file=relative_to_assets("image_6.png"))
+        image_6 = self.canvas.create_image(
+            813.729248046875,
+            524.6370239257812,
+            image=self.image_image_6
+        )
+
+        self.image_image_7 = PhotoImage(
+            file=relative_to_assets("image_7.png"))
+        image_7 = self.canvas.create_image(
+            134.382568359375,
+            524.6370239257812,
+            image=self.image_image_7
+        )
+
+        self.image_image_8 = PhotoImage(
+            file=relative_to_assets("image_8.png"))
+        image_8 = self.canvas.create_image(
+            808.800048828125,
+            88.37741088867188,
+            image=self.image_image_8
+        )
+
+        self.image_image_9 = PhotoImage(
+            file=relative_to_assets("image_9.png"))
+        image_9 = self.canvas.create_image(
+            173.800048828125,
+            468.0,
+            image=self.image_image_9
+        )
+
+        self.image_image_10 = PhotoImage(
+            file=relative_to_assets("image_10.png"))
+        image_10 = self.canvas.create_image(
+            93.800048828125,
+            468.0,
+            image=self.image_image_10
         )
 
         button_image_1 = PhotoImage(
@@ -46,8 +118,8 @@ class AboutPage(tk.Frame):
             relief="flat"
         )
         button_1.place(
-            x=0.0,
-            y=148.0,
+            x=0.199951171875,
+            y=111.0,
             width=259.0,
             height=30.0
         )
@@ -79,8 +151,8 @@ class AboutPage(tk.Frame):
             relief="flat"
         )
         button_2.place(
-            x=0.0,
-            y=211.0,
+            x=0.199951171875,
+            y=174.0,
             width=259.0,
             height=30.0
         )
@@ -112,8 +184,8 @@ class AboutPage(tk.Frame):
             relief="flat"
         )
         button_3.place(
-            x=0.0,
-            y=274.0,
+            x=0.199951171875,
+            y=237.0,
             width=259.0,
             height=30.0
         )
@@ -145,8 +217,8 @@ class AboutPage(tk.Frame):
             relief="flat"
         )
         button_4.place(
-            x=0.0,
-            y=337.0,
+            x=0.199951171875,
+            y=300.0,
             width=259.0,
             height=30.0
         )
@@ -167,106 +239,75 @@ class AboutPage(tk.Frame):
         button_4.bind('<Leave>', button_4_leave)
 
 
-        self.image_image_2 = PhotoImage(
-            file=relative_to_assets("image_2.png"))
-        self.image_2 = canvas.create_image(
-            584.067138671875,
-            284.4524688720703,
-            image=self.image_image_2
+        button_image_5 = PhotoImage(
+            file=relative_to_assets("button_5.png"))
+        button_5 = Button(
+            master=self,
+            image=button_image_5,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame("TakeVideoPage"),
+            relief="flat"
+        )
+        button_5.place(
+            x=0.199951171875,
+            y=367.0,
+            width=259.0,
+            height=30.0
         )
 
-        self.image_image_3 = PhotoImage(
-            file=relative_to_assets("image_3.png"))
-        self.image_3 = canvas.create_image(
-            59.800048828125,
-            352.0,
-            image=self.image_image_3
-        )
+        button_image_hover_5 = PhotoImage(
+            file=relative_to_assets("button_hover_5.png"))
 
-        self.image_image_4 = PhotoImage(
-            file=relative_to_assets("image_4.png"))
-        self.image_4 = canvas.create_image(
-            58.800048828125,
-            289.0,
-            image=self.image_image_4
-        )
+        def button_5_hover(e):
+            button_5.config(
+                image=button_image_hover_5
+            )
+        def button_5_leave(e):
+            button_5.config(
+                image=button_image_5
+            )
 
-        self.image_image_5 = PhotoImage(
-            file=relative_to_assets("image_5.png"))
-        self.image_5 = canvas.create_image(
-            59.800048828125,
-            226.0,
-            image=self.image_image_5
-        )
+        button_5.bind('<Enter>', button_5_hover)
+        button_5.bind('<Leave>', button_5_leave)
 
-        self.image_image_6 = PhotoImage(
-            file=relative_to_assets("image_6.png"))
-        self.image_6 = canvas.create_image(
-            59.800048828125,
-            163.0,
-            image=self.image_image_6
-        )
-
-        self.image_image_7 = PhotoImage(
-            file=relative_to_assets("image_7.png"))
-        self.image_7 = canvas.create_image(
-            344.499755859375,
-            85.39244079589844,
-            image=self.image_image_7
-        )
-
-        self.image_image_8 = PhotoImage(
-            file=relative_to_assets("image_8.png"))
-        self.image_8 = canvas.create_image(
-            414.800048828125,
-            127.0,
-            image=self.image_image_8
-        )
-
-        self.image_image_9 = PhotoImage(
-            file=relative_to_assets("image_9.png"))
-        self.image_9 = canvas.create_image(
-            564.800048828125,
-            271.0,
-            image=self.image_image_9
-        )
-
-        self.image_image_10 = PhotoImage(
-            file=relative_to_assets("image_10.png"))
-        self.image_10 = canvas.create_image(
-            813.729248046875,
-            524.6370239257812,
-            image=self.image_image_10
-        )
 
         self.image_image_11 = PhotoImage(
             file=relative_to_assets("image_11.png"))
-        self.image_11 = canvas.create_image(
-            134.382568359375,
-            524.6370239257812,
+        image_11 = self.canvas.create_image(
+            58.60009765625,
+            382.0,
             image=self.image_image_11
         )
 
         self.image_image_12 = PhotoImage(
             file=relative_to_assets("image_12.png"))
-        self.image_12 = canvas.create_image(
-            808.800048828125,
-            88.37741088867188,
+        image_12 = self.canvas.create_image(
+            59.60009765625,
+            315.0,
             image=self.image_image_12
         )
 
         self.image_image_13 = PhotoImage(
             file=relative_to_assets("image_13.png"))
-        self.image_13 = canvas.create_image(
-            173.800048828125,
-            468.0,
+        image_13 = self.canvas.create_image(
+            58.60009765625,
+            252.0,
             image=self.image_image_13
         )
 
         self.image_image_14 = PhotoImage(
             file=relative_to_assets("image_14.png"))
-        self.image_14 = canvas.create_image(
-            93.800048828125,
-            468.0,
+        image_14 = self.canvas.create_image(
+            59.60009765625,
+            189.0,
             image=self.image_image_14
+        )
+
+        self.image_image_15 = PhotoImage(
+            file=relative_to_assets("image_15.png"))
+        image_15 = self.canvas.create_image(
+            59.60009765625,
+            126.0,
+            image=self.image_image_15
         )
