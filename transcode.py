@@ -60,7 +60,6 @@ class Transcoder:
                 writer.send(frame)
         except:
             return False
-            raise
         finally:
             writer.close()
             reader.close()

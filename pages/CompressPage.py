@@ -1,12 +1,15 @@
 from pathlib import Path
 from tkinter import Canvas, Button, PhotoImage, filedialog
 import tkinter as tk
+import sys
+
+sys.path.append("..")
+
+from transcode import Transcoder
 
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"..\assets\compressPage")
-SAVE_PATH = ""
-VIDEO_PATH = ""
 
 
 def relative_to_assets(path: str) -> Path:
@@ -16,6 +19,11 @@ class CompressPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+
+        self.transcoder = Transcoder()
+        self.save_path = ""
+        self.video_path = ""
+
         self.controller = controller
         self.filetypes = (
             ('MP4 files', '*.mp4'),
@@ -104,11 +112,7 @@ class CompressPage(tk.Frame):
             image=self.button_image_1,
             borderwidth=0,
             highlightthickness=0,
-<<<<<<< Updated upstream
-            command=lambda: startCompress(),
-=======
             command=lambda: self.transcode_start(),
->>>>>>> Stashed changes
             relief="flat"
         )
         self.button_1.place(
@@ -422,15 +426,10 @@ class CompressPage(tk.Frame):
         )
     
     def open_save_directory(self):
-        SAVE_PATH = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
+        self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
 
-<<<<<<< Updated upstream
-        if SAVE_PATH == "" :
-            self.image_image_11 = PhotoImage(
-=======
         if self.save_path == "" :
-            self.image_image_10 = PhotoImage(
->>>>>>> Stashed changes
+            self.image_image_11 = PhotoImage(
                 file=relative_to_assets("image_10.png"))
             self.image_10 = self.canvas.create_image(
                 580.800048828125,
@@ -452,23 +451,6 @@ class CompressPage(tk.Frame):
                 170.0,
                 image=self.image_image_11
             )
-
-<<<<<<< Updated upstream
-        print(SAVE_PATH)
-
-    def input_video_path(self):
-        VIDEO_PATH = filedialog.askopenfilename(filetypes=self.filetypes, title="Input your video")
-        if VIDEO_PATH == "" :
-            self.image_image_10 = PhotoImage(
-                file=relative_to_assets("image_10.png"))
-            self.image_10 = self.canvas.create_image(
-                580.800048828125,
-=======
-            try:
-                self.canvas.delete(self.image_10)
-
-            except:
-                None
 
         print(self.save_path)
 
@@ -515,7 +497,6 @@ class CompressPage(tk.Frame):
                 file=relative_to_assets("image_7.png"))
             self.image_7 = self.canvas.create_image(
                 583.800048828125,
->>>>>>> Stashed changes
                 472.0,
                 image=self.image_image_7
             )
@@ -528,8 +509,5 @@ class CompressPage(tk.Frame):
                 472.0,
                 image=self.image_image_6
             )
-<<<<<<< Updated upstream
 
-        print(VIDEO_PATH)
-=======
->>>>>>> Stashed changes
+        print(self.video_path)
