@@ -1,6 +1,8 @@
 from pathlib import Path
-from tkinter import Canvas, Button, PhotoImage
+from tkinter import Canvas, Button, Label, PhotoImage, filedialog
 import tkinter as tk
+
+from webcam import WebcamManager
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -15,6 +17,14 @@ class TakeVideoPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+
+        self.save_path = ""
+
+        self.filetypes = (
+            ('AVI files', '*.avi'),
+            ('MOV files', '*.mov'),
+            ('All files', '*.*')
+        )
 
         self.canvas = Canvas(
             self,
@@ -43,83 +53,85 @@ class TakeVideoPage(tk.Frame):
             image=self.image_image_2
         )
 
-        # button_image_1 = PhotoImage(
-        #     file=relative_to_assets("button_1.png"))
-        # button_1 = Button(
-        #     master=self,
-        #     image=button_image_1,
-        #     borderwidth=0,
-        #     highlightthickness=0,
-        #     command=lambda: print("button_1 clicked"),
-        #     relief="flat"
-        # )
-        # button_1.place(
-        #     x=267.800048828125,
-        #     y=411.0,
-        #     width=207.0,
-        #     height=30.0
-        # )
+        button_image_1 = PhotoImage(
+            file=relative_to_assets("button_1.png"))
+        self.button_1 = Button(
+            master=self,
+            image=button_image_1,
+            state=tk.DISABLED,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: self.turn_off_command(),
+            relief="flat"
+        )
+        self.button_1.place(
+            x=387.800048828125,
+            y=411.0,
+            width=207.0,
+            height=30.0
+        )
 
-        # button_image_hover_1 = PhotoImage(
-        #     file=relative_to_assets("button_hover_1.png"))
+        button_image_hover_1 = PhotoImage(
+            file=relative_to_assets("button_hover_1.png"))
 
-        # def button_1_hover(e):
-        #     button_1.config(
-        #         image=button_image_hover_1
-        #     )
-        # def button_1_leave(e):
-        #     button_1.config(
-        #         image=button_image_1
-        #     )
+        def button_1_hover(e):
+            self.button_1.config(
+                image=button_image_hover_1
+            )
+        def button_1_leave(e):
+            self.button_1.config(
+                image=button_image_1
+            )
 
-        # button_1.bind('<Enter>', button_1_hover)
-        # button_1.bind('<Leave>', button_1_leave)
+        self.button_1.bind('<Enter>', button_1_hover)
+        self.button_1.bind('<Leave>', button_1_leave)
 
 
-        # button_image_2 = PhotoImage(
-        #     file=relative_to_assets("button_2.png"))
-        # button_2 = Button(
-        #     master=self,
-        #     image=button_image_2,
-        #     borderwidth=0,
-        #     highlightthickness=0,
-        #     command=lambda: print("button_2 clicked"),
-        #     relief="flat"
-        # )
-        # button_2.place(
-        #     x=480.800048828125,
-        #     y=411.0,
-        #     width=207.0,
-        #     height=30.0
-        # )
+        button_image_2 = PhotoImage(
+            file=relative_to_assets("button_2.png"))
+        self.button_2 = Button(
+            master=self,
+            image=button_image_2,
+            borderwidth=0,
+            highlightthickness=0,
+            state=tk.DISABLED,
+            command=lambda: self.turn_on_command(),
+            relief="flat"
+        )
+        self.button_2.place(
+            x=600.800048828125,
+            y=411.0,
+            width=207.0,
+            height=30.0
+        )
 
-        # button_image_hover_2 = PhotoImage(
-        #     file=relative_to_assets("button_hover_2.png"))
+        button_image_hover_2 = PhotoImage(
+            file=relative_to_assets("button_hover_2.png"))
 
-        # def button_2_hover(e):
-        #     button_2.config(
-        #         image=button_image_hover_2
-        #     )
-        # def button_2_leave(e):
-        #     button_2.config(
-        #         image=button_image_2
-        #     )
+        def button_2_hover(e):
+            self.button_2.config(
+                image=button_image_hover_2
+            )
+        def button_2_leave(e):
+            self.button_2.config(
+                image=button_image_2
+            )
 
-        # button_2.bind('<Enter>', button_2_hover)
-        # button_2.bind('<Leave>', button_2_leave)
+        self.button_2.bind('<Enter>', button_2_hover)
+        self.button_2.bind('<Leave>', button_2_leave)
 
 
         button_image_3 = PhotoImage(
             file=relative_to_assets("button_3.png"))
-        button_3 = Button(
+        self.button_3 = Button(
             master=self,
             image=button_image_3,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_3 clicked"),
+            command=lambda: self.open_save_directory(),
             relief="flat"
         )
-        button_3.place(
+        self.button_3.place(
             x=480.800048828125,
             y=448.0,
             width=207.0,
@@ -130,16 +142,16 @@ class TakeVideoPage(tk.Frame):
             file=relative_to_assets("button_hover_3.png"))
 
         def button_3_hover(e):
-            button_3.config(
+            self.button_3.config(
                 image=button_image_hover_3
             )
         def button_3_leave(e):
-            button_3.config(
+            self.button_3.config(
                 image=button_image_3
             )
 
-        button_3.bind('<Enter>', button_3_hover)
-        button_3.bind('<Leave>', button_3_leave)
+        self.button_3.bind('<Enter>', button_3_hover)
+        self.button_3.bind('<Leave>', button_3_leave)
 
 
         self.image_image_3 = PhotoImage(
@@ -205,7 +217,7 @@ class TakeVideoPage(tk.Frame):
             image=button_image_4,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_4 clicked"),
+            command=lambda: controller.show_frame("StartPage"),
             relief="flat"
         )
         button_4.place(
@@ -238,7 +250,7 @@ class TakeVideoPage(tk.Frame):
             image=button_image_5,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_5 clicked"),
+            command=lambda: controller.show_frame("HowPage"),
             relief="flat"
         )
         button_5.place(
@@ -271,7 +283,7 @@ class TakeVideoPage(tk.Frame):
             image=button_image_6,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_6 clicked"),
+            command=lambda: controller.show_frame("CompressPage"),
             relief="flat"
         )
         button_6.place(
@@ -304,7 +316,7 @@ class TakeVideoPage(tk.Frame):
             image=button_image_7,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_7 clicked"),
+            command=lambda: controller.show_frame("AboutPage"),
             relief="flat"
         )
         button_7.place(
@@ -337,7 +349,7 @@ class TakeVideoPage(tk.Frame):
             image=button_image_8,
             borderwidth=0,
             highlightthickness=0,
-            command=lambda: print("button_8 clicked"),
+            command=lambda: controller.show_frame("TakeVideoPage"),
             relief="flat"
         )
         button_8.place(
@@ -403,10 +415,40 @@ class TakeVideoPage(tk.Frame):
             image=self.image_image_14
         )
 
-        self.image_image_15 = PhotoImage(
-            file=relative_to_assets("image_15.png"))
-        image_15 = self.canvas.create_image(
-            585.800048828125,
-            278.0,
-            image=self.image_image_15
+        # self.image_image_15 = PhotoImage(
+        #     file=relative_to_assets("image_15.png"))
+        # image_15 = self.canvas.create_image(
+        #     585.800048828125,
+        #     278.0,
+        #     image=self.image_image_15
+        # )
+        self.cam_container = Label(
+            master=self,
+            text="Camera",
         )
+        self.cam_container.place(
+            x=365.800048828125,
+            y=165.0,
+            height=224,
+            width=453,
+            anchor="nw",
+        )
+    
+    def turn_on_command(self):
+        print("Camera turn on")
+        self.webcam.start_capture()
+        
+    def turn_off_command(self):
+        print("Camera turn off")
+        self.webcam.stop_capture()
+        
+        # destroy webcam object
+        self.webcam = None
+
+    def open_save_directory(self):
+        self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
+        if self.save_path:
+            self.button_2.config(state=tk.NORMAL)
+            self.webcam = WebcamManager(camfeed_container=self.cam_container, start_button=self.button_2, stop_button=self.button_1, dest_path=self.save_path)
+
+        print(self.save_path)
