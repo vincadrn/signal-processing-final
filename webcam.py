@@ -27,16 +27,32 @@ class WebcamManager:
         output_size: tuple[int, int] = Size._4CIF.value,
     ):
         self.video_label = camfeed_container
-        self.video_label.pack()
+        self.video_label.place(
+            x=365.800048828125,
+            y=165.0,
+            height=224,
+            width=453,
+            anchor="nw",
+        )
 
         self.is_capturing = False
         self.stop_thread = False
 
         self.start_button = start_button
-        self.start_button.pack(side=tk.LEFT, padx=10)
+        self.start_button.place(
+            x=600.800048828125,
+            y=411.0,
+            width=207.0,
+            height=30.0
+        )
 
         self.stop_button = stop_button
-        self.stop_button.pack(side=tk.LEFT)
+        self.stop_button.place(
+            x=387.800048828125,
+            y=411.0,
+            width=207.0,
+            height=30.0
+        )
 
         self._dest_path = dest_path
         self._codec = codec
