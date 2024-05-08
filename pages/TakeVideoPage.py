@@ -1,8 +1,9 @@
+from enum import Enum
 from pathlib import Path
-from tkinter import Canvas, Button, Label, PhotoImage, filedialog
+from tkinter import Canvas, Button, Label, OptionMenu, PhotoImage, Radiobutton, StringVar, filedialog
 import tkinter as tk
 
-from webcam import WebcamManager
+from webcam import WebcamManager, Size
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -25,6 +26,30 @@ class TakeVideoPage(tk.Frame):
             ('MOV files', '*.mov'),
             ('All files', '*.*')
         )
+
+        self.dictionary_size={
+            "QCIF": Size.QCIF.value,
+            "CIF": Size.CIF.value,
+            "4CIF": Size._4CIF.value
+        }
+
+        self.output_size_options = [
+            k for k in self.dictionary_size
+        ]
+
+        # Dropdown menu options 
+        self.codec_options = [ 
+            "h261",
+            "h263"
+        ]
+
+        # datatype of menu text 
+        self.clicked_codec = StringVar() 
+        self.clicked_output_size = StringVar() 
+        
+        # initial menu text 
+        self.clicked_codec.set( "h263" ) 
+        self.clicked_output_size.set( "4CIF" ) 
 
         self.canvas = Canvas(
             self,
@@ -415,13 +440,7 @@ class TakeVideoPage(tk.Frame):
             image=self.image_image_14
         )
 
-        # self.image_image_15 = PhotoImage(
-        #     file=relative_to_assets("image_15.png"))
-        # image_15 = self.canvas.create_image(
-        #     585.800048828125,
-        #     278.0,
-        #     image=self.image_image_15
-        # )
+
         self.cam_container = Label(
             master=self,
             text="Camera",
@@ -433,6 +452,32 @@ class TakeVideoPage(tk.Frame):
             width=453,
             anchor="nw",
         )
+
+        self.dropdown_codec = OptionMenu(
+            self, 
+            self.clicked_codec, 
+            *self.codec_options 
+            )
+
+        self.dropdown_codec.place(
+            x=748.800048828125,
+            y=165.0
+        )
+
+        self.dropdown_output_size = OptionMenu(
+            self,
+            self.clicked_output_size,
+            *self.output_size_options
+        )
+
+        self.dropdown_output_size.place(
+            x=365.800048828125,
+            y=165.0
+        )
+    
+    # Change the label text 
+    def show(self): 
+        self.dropdown.config( text = self.clicked.get() ) 
     
     def turn_on_command(self):
         print("Camera turn on")
@@ -449,6 +494,6 @@ class TakeVideoPage(tk.Frame):
         self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
         if self.save_path:
             self.button_2.config(state=tk.NORMAL)
-            self.webcam = WebcamManager(camfeed_container=self.cam_container, start_button=self.button_2, stop_button=self.button_1, dest_path=self.save_path)
+            self.webcam = WebcamManager(camfeed_container=self.cam_container, start_button=self.button_2, stop_button=self.button_1, dest_path=self.save_path, codec=self.clicked_codec.get(), output_size=self.dictionary_size[self.clicked_output_size.get()])
 
         print(self.save_path)

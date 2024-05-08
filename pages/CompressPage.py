@@ -1,5 +1,5 @@
 from pathlib import Path
-from tkinter import Canvas, Button, PhotoImage, filedialog
+from tkinter import Canvas, Button, OptionMenu, PhotoImage, StringVar, filedialog
 import tkinter as tk
 import sys
 
@@ -29,6 +29,34 @@ class CompressPage(tk.Frame):
             ('MP4 files', '*.mp4'),
             ('All files', '*.*')
         )
+
+        # Dropdown menu options 
+        self.quality_options = [ 
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+        ]
+
+        self.output_format_options = [
+            "avi",
+            "mov",
+            "mkv"
+        ]
+
+        # datatype of menu text 
+        self.clicked_quality = StringVar()
+        self.clicked_output_format =  StringVar()
+        
+        # initial menu text 
+        self.clicked_quality.set( "5" )
+        self.clicked_output_format.set( "avi" ) 
 
         self.canvas = Canvas(
             self,
@@ -103,6 +131,32 @@ class CompressPage(tk.Frame):
             816.800048828125,
             88.37741088867188,
             image=self.image_image_14
+        )
+
+        self.dropdown_quality = OptionMenu(
+            self, 
+            self.clicked_quality, 
+            *self.quality_options 
+            ) 
+
+        self.dropdown_quality.place(
+            x=420.800048828125,
+            y=417.0,
+            width=60.0,
+            height=43.0
+        )
+        
+        self.dropdown_output_format = OptionMenu(
+            self, 
+            self.clicked_output_format, 
+            *self.output_format_options 
+            ) 
+
+        self.dropdown_output_format.place(
+            x=680.800048828125,
+            y=417.0,
+            width=60.0,
+            height=43.0
         )
 
         self.button_image_1 = PhotoImage(
@@ -496,7 +550,9 @@ class CompressPage(tk.Frame):
         print(self.video_path)
 
     def transcode_start(self):
-        success = self.transcoder.transcode(self.save_path, self.video_path)
+        success = self.transcoder.transcode(self.save_path, self.video_path, dest_container=self.clicked_output_format.get(), quality=int(self.clicked_quality.get()))
+
+        print(self.clicked_quality.get())
 
         if success:
             self.image_image_7 = PhotoImage(
