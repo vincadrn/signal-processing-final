@@ -25,6 +25,7 @@ class WebcamManager:
         dest_path: str,
         codec: Literal["h261", "h263"] = "h263",
         output_size: tuple[int, int] = Size._4CIF.value,
+        video_input_source: str = "0",
     ):
         self.video_label = camfeed_container
         self.video_label.place(
@@ -57,6 +58,7 @@ class WebcamManager:
         self._dest_path = dest_path
         self._codec = codec
         self._output_size = output_size
+        self._source_index = video_input_source
 
     def start_capture(self):
         if not self.is_capturing:
@@ -77,7 +79,7 @@ class WebcamManager:
     
     def _capture_video(self):
         try:
-            video_reader = imageio.get_reader('<video0>')
+            video_reader = imageio.get_reader(f"<video{self._source_index}>")
             self.video_writer = iio.imopen(self._dest_path, "w", plugin="pyav")
             # the fps should not be hardcoded
             # however if the fps is matched to the input,
