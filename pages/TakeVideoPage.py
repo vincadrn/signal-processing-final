@@ -4,6 +4,7 @@ from tkinter import Canvas, Button, Label, OptionMenu, PhotoImage, Radiobutton, 
 import tkinter as tk
 
 from webcam import WebcamManager, Size
+from input_source import InputSource
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -43,13 +44,22 @@ class TakeVideoPage(tk.Frame):
             "h263"
         ]
 
+        self._input_sources = {}
+        try:
+            for i in range(5):
+                self._input_sources[InputSource.get_cam_inputname(i)] = str(i)
+        except IndexError:
+            print(f"Found {i} source(s)")
+
         # datatype of menu text 
         self.clicked_codec = StringVar() 
         self.clicked_output_size = StringVar() 
+        self.clicked_input_source = StringVar()
         
         # initial menu text 
         self.clicked_codec.set( "h263" ) 
         self.clicked_output_size.set( "4CIF" ) 
+        self.clicked_input_source.set( "Input source" )
 
         self.canvas = Canvas(
             self,
@@ -474,6 +484,17 @@ class TakeVideoPage(tk.Frame):
             x=365.800048828125,
             y=165.0
         )
+
+        self.dropdown_input_source = OptionMenu(
+            self,
+            self.clicked_input_source,
+            *([k for k in self._input_sources]),
+        )
+
+        self.dropdown_input_source.place(
+            x=365.8,
+            y=360,
+        )
     
     # Change the label text 
     def show(self): 
@@ -494,6 +515,14 @@ class TakeVideoPage(tk.Frame):
         self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
         if self.save_path:
             self.button_2.config(state=tk.NORMAL)
-            self.webcam = WebcamManager(camfeed_container=self.cam_container, start_button=self.button_2, stop_button=self.button_1, dest_path=self.save_path, codec=self.clicked_codec.get(), output_size=self.dictionary_size[self.clicked_output_size.get()])
+            self.webcam = WebcamManager(
+                camfeed_container=self.cam_container,
+                start_button=self.button_2,
+                stop_button=self.button_1,
+                dest_path=self.save_path,
+                codec=self.clicked_codec.get(),
+                output_size=self.dictionary_size[self.clicked_output_size.get()],
+                video_input_source=self._input_sources[self.clicked_input_source.get()]
+            )
 
         print(self.save_path)
