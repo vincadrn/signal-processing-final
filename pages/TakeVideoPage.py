@@ -34,8 +34,12 @@ class TakeVideoPage(tk.Frame):
             "4CIF": Size._4CIF.value
         }
 
-        self.output_size_options = [
+        self.output_size_options_h263 = [
             k for k in self.dictionary_size
+        ]
+
+        self.output_size_options_h261 = [
+            "QCIF", "CIF"
         ]
 
         # Dropdown menu options 
@@ -466,7 +470,8 @@ class TakeVideoPage(tk.Frame):
         self.dropdown_codec = OptionMenu(
             self, 
             self.clicked_codec, 
-            *self.codec_options 
+            *self.codec_options,
+            command=lambda x: self.optionsCallback(x)
             )
 
         self.dropdown_codec.place(
@@ -474,13 +479,20 @@ class TakeVideoPage(tk.Frame):
             y=165.0
         )
 
-        self.dropdown_output_size = OptionMenu(
+        self.dropdown_output_size_h263 = OptionMenu(
             self,
             self.clicked_output_size,
-            *self.output_size_options
+            *self.output_size_options_h263,
         )
 
-        self.dropdown_output_size.place(
+        self.dropdown_output_size_h261 = OptionMenu(
+            self,
+            self.clicked_output_size,
+            *self.output_size_options_h261,
+        )
+
+
+        self.dropdown_output_size_h263.place(
             x=365.800048828125,
             y=165.0
         )
@@ -526,3 +538,37 @@ class TakeVideoPage(tk.Frame):
             )
 
         print(self.save_path)
+    
+    def optionsCallback(self, selectedValue):
+        if selectedValue == "h263":
+            print("Di h263")
+
+            self.dropdown_output_size_h263 = OptionMenu(
+                self,
+                self.clicked_output_size,
+                *self.output_size_options_h263,
+            )
+
+            self.dropdown_output_size_h263.place(
+                x=365.800048828125,
+                y=165.0
+            )
+        
+        elif selectedValue == "h261":
+            print("Di h261")
+
+            self.dropdown_output_size_h261 = OptionMenu(
+                self,
+                self.clicked_output_size,
+                *self.output_size_options_h261,
+            )
+
+            self.clicked_output_size.set( "QCIF" ) 
+
+            self.dropdown_output_size_h261.place(
+                x=365.800048828125,
+                y=165.0
+            )
+
+        else:
+            None
