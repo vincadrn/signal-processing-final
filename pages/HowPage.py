@@ -258,7 +258,7 @@ class HowPage(tk.Frame):
         )
         button_5.place(
             x=0.20001220703125,
-            y=300.0,
+            y=367.0,
             width=259.0,
             height=30.0
         )
@@ -291,7 +291,7 @@ class HowPage(tk.Frame):
         )
         button_6.place(
             x=0.20001220703125,
-            y=367.0,
+            y=300.0,
             width=259.0,
             height=30.0
         )

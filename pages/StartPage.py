@@ -146,7 +146,7 @@ class StartPage(tk.Frame):
         )
         self.button_4.place(
             x=0.0,
-            y=300.0,
+            y=367.0,
             width=259.0,
             height=30.0
         )
@@ -179,7 +179,7 @@ class StartPage(tk.Frame):
         )
         self.button_5.place(
             x=0.0,
-            y=367.0,
+            y=300.0,
             width=259.0,
             height=30.0
         )

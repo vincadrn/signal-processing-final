@@ -385,7 +385,7 @@ class CompressPage(tk.Frame):
         )
         self.button_7.place(
             x=0.199951171875,
-            y=300.0,
+            y=367.0,
             width=259.0,
             height=30.0
         )
@@ -418,7 +418,7 @@ class CompressPage(tk.Frame):
         )
         self.button_8.place(
             x=0.199951171875,
-            y=367.0,
+            y=300.0,
             width=259.0,
             height=30.0
         )
