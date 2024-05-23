@@ -33,7 +33,9 @@ class App(tk.Tk):
 
 if __name__ == "__main__":
     app = App()
+    icon = tk.PhotoImage(file = "./assets/favicon.png")
     app.title("Video Compressor Application")
+    app.iconphoto(True, icon)
     app.geometry("950x560")
     app.resizable(False, False)
     app.mainloop()

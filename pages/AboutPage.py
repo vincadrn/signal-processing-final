@@ -63,7 +63,7 @@ class AboutPage(tk.Frame):
             file=relative_to_assets("image_5.png"))
         image_5 = self.canvas.create_image(
             564.800048828125,
-            271.0,
+            320.0,
             image=self.image_image_5
         )
 
