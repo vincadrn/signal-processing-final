@@ -377,6 +377,20 @@ class StartPage(tk.Frame):
         self.button_7.bind('<Enter>', button_7_hover)
         self.button_7.bind('<Leave>', button_7_leave)
 
+        self.button_dump_details = Button(
+            master=self,
+            borderwidth=0,
+            highlightthickness=0,
+            text="Dump details",
+            command=lambda: controller.show_frame("MetadataPage"),
+        )
+        self.button_dump_details.place(
+            x=500.0044555664062,
+            y=456.837158203125,
+            width=178.20233154296875,
+            height=43.42745590209961
+        )
+
 
         self.image_image_16 = PhotoImage(
             file=relative_to_assets("image_16.png"))
