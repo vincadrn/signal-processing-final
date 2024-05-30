@@ -26,6 +26,7 @@ class CompressPage(tk.Frame):
 
         self.controller = controller
         self.filetypes = (
+            ('AVI files', '*.avi'),
             ('MP4 files', '*.mp4'),
             ('All files', '*.*')
         )
@@ -437,6 +438,39 @@ class CompressPage(tk.Frame):
 
         self.button_8.bind('<Enter>', button_8_hover)
         self.button_8.bind('<Leave>', button_8_leave)
+        
+        self.button_analyze_image = PhotoImage(
+            file=relative_to_assets("Button_Analyze.png"))
+        self.button_analyze = Button(
+            master=self,
+            image=self.button_analyze_image,
+            state=tk.DISABLED,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: self.inputStartAnalyze(),
+            relief="flat"
+        )
+        self.button_analyze.place(
+            x=280.199951171875,
+            y=280.0,
+            width=217.12,
+            height=44.0
+        )
+
+        self.Button_Analyze_Image_Hover = PhotoImage(
+            file=relative_to_assets("Button_Analyze_hover.png"))
+
+        def button_analyze_hover(e):
+            self.button_analyze.config(
+                image=self.Button_Analyze_Image_Hover
+            )
+        def button_analyze_leave(e):
+            self.button_analyze.config(
+                image=self.button_analyze_image
+            )
+
+        self.button_analyze.bind('<Enter>', button_analyze_hover)
+        self.button_analyze.bind('<Leave>', button_analyze_leave)
 
 
         self.image_image_17 = PhotoImage(
@@ -562,6 +596,7 @@ class CompressPage(tk.Frame):
                 472.0,
                 image=self.image_image_7
             )
+            self.button_analyze.config(state=tk.ACTIVE)
 
         else:
             self.image_image_6 = PhotoImage(
@@ -573,3 +608,44 @@ class CompressPage(tk.Frame):
             )
 
         print(self.video_path)
+
+    def inputStartAnalyze(self):
+        self.analyze_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input analyze directory")
+
+        if self.analyze_path == "" :
+            self.image_failed_prompt = PhotoImage(
+                file=relative_to_assets("PromptFailedAnalysis.png"))
+            self.failed_prompt = self.canvas.create_image(
+                380.800048828125,
+                340.0,
+                image=self.image_failed_prompt
+            )
+
+            try:
+                self.canvas.delete(self.success_prompt)
+
+            except:
+                None
+        
+        else :
+            self.image_success_prompt = PhotoImage(
+                file=relative_to_assets("PromptSuccessAnalysis.png"))
+            
+            self.startAnalyze() # Masukkin process framenya disini
+
+            self.success_prompt = self.canvas.create_image(
+                380.800048828125,
+                340.0,
+                image=self.image_success_prompt
+            )
+
+            try:
+                self.canvas.delete(self.failed_prompt)
+
+            except:
+                None
+
+        print(self.save_path)
+
+    def startAnalyze(self):
+        None # Masukkin disini processnya
