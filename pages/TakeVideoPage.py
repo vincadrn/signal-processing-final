@@ -1,6 +1,6 @@
 from enum import Enum
 from pathlib import Path
-from tkinter import Canvas, Button, Label, OptionMenu, PhotoImage, Radiobutton, StringVar, filedialog
+from tkinter import Canvas, Button, Label, OptionMenu, PhotoImage, Radiobutton, StringVar, filedialog, messagebox
 import tkinter as tk
 
 from webcam import WebcamManager, Size
@@ -524,7 +524,19 @@ class TakeVideoPage(tk.Frame):
         self.webcam = None
 
     def open_save_directory(self):
-        self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
+        try:
+            codec=self.clicked_codec.get()
+            output_size=self.dictionary_size[self.clicked_output_size.get()]
+            input_source=self._input_sources[self.clicked_input_source.get()]
+        except KeyError:
+            messagebox.showwarning("Warning", "Please ensure frame size, codec, and input source are already selected")
+            return
+        except Exception as e:
+            messagebox.showerror("Error", e)
+            return
+
+        self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory", defaultextension=self.filetypes)
+        
         if self.save_path:
             self.button_2.config(state=tk.NORMAL)
             self.webcam = WebcamManager(
@@ -532,9 +544,9 @@ class TakeVideoPage(tk.Frame):
                 start_button=self.button_2,
                 stop_button=self.button_1,
                 dest_path=self.save_path,
-                codec=self.clicked_codec.get(),
-                output_size=self.dictionary_size[self.clicked_output_size.get()],
-                video_input_source=self._input_sources[self.clicked_input_source.get()]
+                codec=codec,
+                output_size=output_size,
+                video_input_source=input_source,
             )
 
         print(self.save_path)
