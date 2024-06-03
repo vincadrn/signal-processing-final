@@ -1,7 +1,8 @@
 from pathlib import Path
-from tkinter import Canvas, Button, OptionMenu, PhotoImage, StringVar, filedialog
+from tkinter import Canvas, Button, OptionMenu, PhotoImage, StringVar, filedialog, messagebox
 import tkinter as tk
 import sys
+from analyze import Analyze
 
 sys.path.append("..")
 
@@ -21,6 +22,7 @@ class CompressPage(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         self.transcoder = Transcoder()
+        self.analyze = Analyze()
         self.save_path = ""
         self.video_path = ""
 
@@ -444,7 +446,6 @@ class CompressPage(tk.Frame):
         self.button_analyze = Button(
             master=self,
             image=self.button_analyze_image,
-            state=tk.DISABLED,
             borderwidth=0,
             highlightthickness=0,
             command=lambda: self.inputStartAnalyze(),
@@ -514,7 +515,7 @@ class CompressPage(tk.Frame):
         )
     
     def open_save_directory(self):
-        self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
+        self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory", defaultextension=self.filetypes)
 
         if self.save_path == "" :
             self.image_image_10 = PhotoImage(
@@ -610,29 +611,12 @@ class CompressPage(tk.Frame):
         print(self.video_path)
 
     def inputStartAnalyze(self):
-        self.analyze_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input analyze directory")
-
-        if self.analyze_path == "" :
-            self.image_failed_prompt = PhotoImage(
-                file=relative_to_assets("PromptFailedAnalysis.png"))
-            self.failed_prompt = self.canvas.create_image(
-                380.800048828125,
-                340.0,
-                image=self.image_failed_prompt
-            )
-
-            try:
-                self.canvas.delete(self.success_prompt)
-
-            except:
-                None
-        
-        else :
+        try:
+            self.startAnalyze() # Masukkin process framenya disini
+            
             self.image_success_prompt = PhotoImage(
                 file=relative_to_assets("PromptSuccessAnalysis.png"))
             
-            self.startAnalyze() # Masukkin process framenya disini
-
             self.success_prompt = self.canvas.create_image(
                 380.800048828125,
                 340.0,
@@ -644,8 +628,26 @@ class CompressPage(tk.Frame):
 
             except:
                 None
+        except Exception as e:
+            messagebox.showerror("Error", e)
+
+            self.image_failed_prompt = PhotoImage(
+                file=relative_to_assets("PromptFailedAnalysis.png"))
+            self.failed_prompt = self.canvas.create_image(
+                380.800048828125,
+                340.0,
+                image=self.image_failed_prompt
+            )
+            try:
+                self.canvas.delete(self.success_prompt)
+
+            except:
+                None
+
 
         print(self.save_path)
 
     def startAnalyze(self):
-        None # Masukkin disini processnya
+        self.analyze.open_file()
+        self.analyze.process_and_dump_details()
+        # None # Masukkin disini processnya

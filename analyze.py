@@ -1,80 +1,28 @@
-from tkinter import Canvas, Button, Label, filedialog, messagebox
-import tkinter as tk
-from imageio_ffmpeg import get_ffmpeg_exe
-import subprocess
+from tkinter import filedialog, messagebox
 import os
+import subprocess
+from imageio_ffmpeg import get_ffmpeg_exe
 from pathlib import Path
-import pprint
 import json
 
-TOP_PATH = Path(__file__).resolve().parent.parent.absolute()
+TOP_PATH = Path(__file__).resolve().parent.absolute()
 FFPROBE_PATH = os.path.join(TOP_PATH, "binaries", "ffprobe-win32-v4.1.exe")
 
-class MetadataPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
-        
-        self.canvas = Canvas(
-            self,
-            bg = "#060B24",
-            height = 560,
-            width = 950,
-            bd = 0,
-            highlightthickness = 0,
-            relief = "ridge"
-        )
-        self.canvas.place(x=0, y=0)
-
-        self.file_opener = Button(
-            master=self,
-            text="Pick a video",
-            command=lambda: self.open_file(),
-        )
-        self.file_opener.place(
-            x=100,
-            y=100,
-            width=178,
-            height=43,
-        )
-        
-        self.picked_file_name = Label(
-            master=self,
-        )
-        self.picked_file_name.place(
-            x=400,
-            y=100,
-            width=500,
-            height=43,
-        )
-
-        self.run_trigger = Button(
-            master=self,
-            text="Run",
-            command=lambda: self.process_and_dump_details(),
-        )
-        self.run_trigger.place(
-            x=400,
-            y=200,
-            width=178,
-            height=43,
-        )
-    
+class Analyze:
     def open_file(self):
-        self.video_path = filedialog.askopenfilename(title="Input your video")
+        self.video_path = filedialog.askopenfilename(title="Select your input video")
+
+        if not os.path.exists(self.video_path):
+            messagebox.showerror("Error", f"{self.video_path} does not exists!")
+            raise FileNotFoundError
 
         self.video_name = "".join(self.video_path.split("/")[-1].split(".")[:-1])
         self.video_dir = "/".join(self.video_path.split("/")[:-1])
-        self.picked_file_name.config(text=self.video_path)
-
-        if True:
-            pass
-        else:
-            pass
     
     def process_and_dump_details(self):
         output_dir = f"{self.video_dir}/{self.video_name}"
         if not os.path.exists(output_dir):
+            messagebox.showinfo("Creating new folder", f"This process will create folder on {output_dir}")
             os.mkdir(output_dir)
 
         try:
@@ -145,7 +93,10 @@ class MetadataPage(tk.Frame):
                     }
                 })
 
-            pprint.pprint(summary)
+            messagebox.showinfo("Success", f"All frames can be found in {all_frames_with_mvs_dir}\n\n"
+                                "The frame format is frame_<frame_number>_<frame_type>_<size_in_bytes>\n\n"
+                                "You can also see for details in metadata.json file")
+            messagebox.showinfo("Summary", json.dumps(summary, indent=4))
 
         except Exception as e:
             messagebox.showerror("Error", e)
