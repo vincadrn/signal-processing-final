@@ -76,6 +76,8 @@ class WebcamManager:
         self.stop_thread = True
         self.start_button.config(state=tk.NORMAL)
         self.stop_button.config(state=tk.DISABLED)
+        self.video_label.config(image=None)
+        self.video_label.image = None
     
     def _capture_video(self):
         try:
@@ -84,7 +86,7 @@ class WebcamManager:
             # the fps should not be hardcoded
             # however if the fps is matched to the input,
             # the playback would be way too fast
-            self.video_writer.init_video_stream(self._codec, fps=12)
+            self.video_writer.init_video_stream("h261", fps=16)
             for frame in video_reader:
                 if self.is_capturing:
                     img_frame = Image.fromarray(frame)

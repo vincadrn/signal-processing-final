@@ -2,6 +2,7 @@ from pathlib import Path
 from tkinter import Canvas, Button, OptionMenu, PhotoImage, StringVar, filedialog
 import tkinter as tk
 import sys
+from analyze import Analyze
 
 sys.path.append("..")
 
@@ -26,6 +27,7 @@ class CompressPage(tk.Frame):
 
         self.controller = controller
         self.filetypes = (
+            ('AVI files', '*.avi'),
             ('MP4 files', '*.mp4'),
             ('All files', '*.*')
         )
@@ -438,7 +440,6 @@ class CompressPage(tk.Frame):
         self.button_8.bind('<Enter>', button_8_hover)
         self.button_8.bind('<Leave>', button_8_leave)
 
-
         self.image_image_17 = PhotoImage(
             file=relative_to_assets("image_17.png"))
         self.image_17 = self.canvas.create_image(
@@ -480,7 +481,7 @@ class CompressPage(tk.Frame):
         )
     
     def open_save_directory(self):
-        self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory")
+        self.save_path = filedialog.asksaveasfilename(filetypes=self.filetypes, title="Input save directory", defaultextension=self.filetypes)
 
         if self.save_path == "" :
             self.image_image_10 = PhotoImage(
@@ -562,6 +563,7 @@ class CompressPage(tk.Frame):
                 472.0,
                 image=self.image_image_7
             )
+            self.button_analyze.config(state=tk.ACTIVE)
 
         else:
             self.image_image_6 = PhotoImage(

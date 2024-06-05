@@ -1,7 +1,7 @@
 from pathlib import Path
-from tkinter import Canvas, Button, PhotoImage
+from tkinter import Canvas, Button, PhotoImage, messagebox
 import tkinter as tk
-
+from analyze import Analyze
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"..\assets\startPage")
@@ -15,6 +15,7 @@ class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self.analyze = Analyze()
 
         self.canvas = Canvas(
             self,
@@ -260,7 +261,7 @@ class StartPage(tk.Frame):
             file=relative_to_assets("image_9.png"))
         self.image_9 = self.canvas.create_image(
             585.3896484375,
-            193.2123260498047,
+            163.2123260498047,
             image=self.image_image_9
         )
 
@@ -268,7 +269,7 @@ class StartPage(tk.Frame):
             file=relative_to_assets("image_10.png"))
         self.image_10 = self.canvas.create_image(
             585.32958984375,
-            232.13230895996094,
+            202.13230895996094,
             image=self.image_image_10
         )
 
@@ -300,7 +301,7 @@ class StartPage(tk.Frame):
             file=relative_to_assets("image_14.png"))
         self.image_14 = self.canvas.create_image(
             467.79998779296875,
-            328.0,
+            298.0,
             image=self.image_image_14
         )
 
@@ -308,7 +309,7 @@ class StartPage(tk.Frame):
             file=relative_to_assets("image_15.png"))
         self.image_15 = self.canvas.create_image(
             684.7999877929688,
-            327.0,
+            297.0,
             image=self.image_image_15
         )
 
@@ -324,7 +325,7 @@ class StartPage(tk.Frame):
         )
         self.button_6.place(
             x=381.86212158203125,
-            y=396.837158203125,
+            y=366.837158203125,
             width=178.20233154296875,
             height=43.42745590209961
         )
@@ -357,7 +358,7 @@ class StartPage(tk.Frame):
         )
         self.button_7.place(
             x=596.0044555664062,
-            y=396.837158203125,
+            y=366.837158203125,
             width=178.20233154296875,
             height=43.42745590209961
         )
@@ -377,6 +378,20 @@ class StartPage(tk.Frame):
         self.button_7.bind('<Enter>', button_7_hover)
         self.button_7.bind('<Leave>', button_7_leave)
 
+        # self.button_dump_details = Button(
+        #     master=self,
+        #     borderwidth=0,
+        #     highlightthickness=0,
+        #     text="Dump details",
+        #     command=lambda: controller.show_frame("MetadataPage"),
+        # )
+        # self.button_dump_details.place(
+        #     x=500.0044555664062,
+        #     y=456.837158203125,
+        #     width=178.20233154296875,
+        #     height=43.42745590209961
+        # )
+
 
         self.image_image_16 = PhotoImage(
             file=relative_to_assets("image_16.png"))
@@ -393,3 +408,77 @@ class StartPage(tk.Frame):
             468.0,
             image=self.image_image_17
         )
+
+        self.button_analyze_image = PhotoImage(
+            file=relative_to_assets("Button_Analyze.png"))
+        self.button_analyze = Button(
+            master=self,
+            image=self.button_analyze_image,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: self.inputStartAnalyze(),
+            relief="flat"
+        )
+        self.button_analyze.place(
+            x=465.0044555664062,
+            y=426.837158203125,
+            width=217.12,
+            height=44.0
+        )
+
+        self.Button_Analyze_Image_Hover = PhotoImage(
+            file=relative_to_assets("Button_Analyze_hover.png"))
+
+        def button_analyze_hover(e):
+            self.button_analyze.config(
+                image=self.Button_Analyze_Image_Hover
+            )
+        def button_analyze_leave(e):
+            self.button_analyze.config(
+                image=self.button_analyze_image
+            )
+
+        self.button_analyze.bind('<Enter>', button_analyze_hover)
+        self.button_analyze.bind('<Leave>', button_analyze_leave)
+    
+    def inputStartAnalyze(self):
+        try:
+            self.startAnalyze() # Masukkin process framenya disini
+            
+            self.image_success_prompt = PhotoImage(
+                file=relative_to_assets("PromptSuccessAnalysis.png"))
+            
+            self.success_prompt = self.canvas.create_image(
+                570.0044555664062,
+                480.837158203125,
+                image=self.image_success_prompt
+            )
+
+            try:
+                self.canvas.delete(self.failed_prompt)
+
+            except:
+                None
+        except Exception as e:
+            messagebox.showerror("Error", e)
+
+            self.image_failed_prompt = PhotoImage(
+                file=relative_to_assets("PromptFailedAnalysis.png"))
+            self.failed_prompt = self.canvas.create_image(
+                570.0044555664062,
+                480.837158203125,
+                image=self.image_failed_prompt
+            )
+            try:
+                self.canvas.delete(self.success_prompt)
+
+            except:
+                None
+
+
+        print(self.save_path)
+
+    def startAnalyze(self):
+        self.analyze.open_file()
+        self.analyze.process_and_dump_details()
+        # None # Masukkin disini processnya
